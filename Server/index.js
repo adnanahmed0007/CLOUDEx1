@@ -16,7 +16,7 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://cloud-ex-delta.vercel.app",
+            "https://cloud-ex1.vercel.app",
         ],
         credentials: true,
     })
