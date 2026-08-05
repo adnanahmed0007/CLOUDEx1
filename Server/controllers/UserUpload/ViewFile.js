@@ -19,12 +19,17 @@ const ViewFile = async (req, res) => {
             });
         }
 
-        // File now lives on Cloudinary, not local disk — fetch it and
-        // pipe it straight through so the frontend's existing
-        // responseType: "blob" call keeps working unchanged.
+        console.log("Cloudinary URL:", file.filePath);
+
         const cloudinaryRes = await fetch(file.filePath);
 
-        if (!cloudinaryRes.ok || !cloudinaryRes.body) {
+        console.log("Status:", cloudinaryRes.status);
+        console.log("Headers:", Object.fromEntries(cloudinaryRes.headers));
+
+        if (!cloudinaryRes.ok) {
+            const text = await cloudinaryRes.text();
+            console.log("Cloudinary Error:", text);
+
             return res.status(404).json({
                 message: "File not found on storage.",
             });

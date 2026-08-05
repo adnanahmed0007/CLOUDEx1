@@ -1,14 +1,13 @@
 import UploadFileModel from "../../models/UploadModel.js";
 import redisClient from "../../config/redis.js";
 import { uploadBufferToCloudinary } from "../../util/uploadToCloudinary.js";
+import path from "path";
 
 const UploadFile = async (req, res) => {
 
     try {
         const { folderId } = req.body;
 
-        console.log(req.body);
-        console.log(folderId);
 
         if (!req.file) {
             return res.status(400).json({
@@ -27,15 +26,18 @@ const UploadFile = async (req, res) => {
 
         // req.file.buffer holds the raw bytes (multer memoryStorage) —
         // stream them up to Cloudinary instead of writing to local disk.
-        const uniqueName = Date.now() + "-" + req.file.originalname;
+        const uniqueName =
+            Date.now() + "-" + path.parse(req.file.originalname).name;
 
         const cloudinaryResult = await uploadBufferToCloudinary(
             req.file.buffer,
             {
                 folder: `cloudex/${req.user._id}`,
                 filename: uniqueName,
+                mimeType: req.file.mimetype,
             }
         );
+        console.log("clodinar" + " " + cloudinaryResult)
 
         const file = new UploadFileModel({
             owner: req.user._id,
