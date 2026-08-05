@@ -1,7 +1,7 @@
 import axios from "axios";
 
-
-export const SERVER_URL = "http://localhost:9090";
+ 
+export const SERVER_URL = "https://cloudex1-ektu.onrender.com" || "http://localhost:9090";
 export const API_BASE_URL = `${SERVER_URL}/auth/api`;
 
 const api = axios.create({
