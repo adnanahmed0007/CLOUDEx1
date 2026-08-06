@@ -5,6 +5,14 @@
 html {
   scroll-behavior: smooth;
 }
+body {
+  @apply bg-paper text-ink transition-colors duration-300;
+}
+
+.dark body {
+  background: #0f1729;
+  color: white;
+}
 
 * {
   scrollbar-width: thin;
