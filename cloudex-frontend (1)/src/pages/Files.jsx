@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import {
@@ -209,8 +209,8 @@ export default function Files() {
     <div className="space-y-6 animate-fadeUp">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h2 className="font-display font-semibold text-2xl text-ink">My Files</h2>
-          <p className="text-sm text-ink-muted mt-1">
+          <h2 className="font-display font-semibold text-2xl text-gray-900 dark:text-white">My Files</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
             {totalFiles} file{totalFiles === 1 ? "" : "s"}
             {activeSearch ? ` matching "${activeSearch}"` : ""}
           </p>
@@ -220,19 +220,19 @@ export default function Files() {
           <form onSubmit={runSearch} className="relative">
             <Search
               size={15}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
             />
             <input
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search files…"
-              className="bg-surface border border-line rounded-lg pl-9 pr-8 py-2 text-sm w-48 sm:w-60 focus:border-cobalt transition-colors"
+              className="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg pl-9 pr-8 py-2 text-sm w-48 sm:w-60 focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
             />
             {(searchInput || activeSearch) && (
               <button
                 type="button"
                 onClick={clearSearch}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
               >
                 <X size={14} />
               </button>
@@ -246,7 +246,7 @@ export default function Files() {
                 setSort(e.target.value);
                 setPage(1);
               }}
-              className="bg-surface border border-line rounded-lg px-3 py-2 text-sm focus:border-cobalt transition-colors"
+              className="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white rounded-lg px-3 py-2 text-sm focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
             >
               {SORTS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -260,7 +260,7 @@ export default function Files() {
 
       <UploadDropzone onFileSelected={handleUpload} disabled={uploading} />
       {uploading && (
-        <div className="w-full bg-line rounded-full h-1.5 overflow-hidden">
+        <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden">
           <div
             className="bg-cobalt h-full transition-all duration-200"
             style={{ width: `${uploadProgress}%` }}
@@ -268,11 +268,11 @@ export default function Files() {
         </div>
       )}
 
-      <div className="bg-surface rounded-xl2 shadow-card overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl2 shadow-card overflow-hidden transition-colors">
         {loading ? (
           <div className="p-6 space-y-3">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-14 bg-paper rounded-lg animate-pulse" />
+              <div key={i} className="h-14 bg-gray-100 dark:bg-slate-700 rounded-lg animate-pulse" />
             ))}
           </div>
         ) : files.length === 0 ? (
@@ -290,7 +290,7 @@ export default function Files() {
             {/* Desktop table */}
             <table className="w-full hidden sm:table">
               <thead>
-                <tr className="text-left text-xs font-medium text-ink-faint uppercase tracking-wide border-b border-line">
+                <tr className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-200 dark:border-slate-700">
                   <th className="px-6 py-3 font-medium">Name</th>
                   <th className="px-4 py-3 font-medium">Type</th>
                   <th className="px-4 py-3 font-medium">Size</th>
@@ -298,15 +298,15 @@ export default function Files() {
                   <th className="px-4 py-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-line">
+              <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
                 {files.map((f) => (
-                  <tr key={f._id} className="hover:bg-paper/60 transition-colors group">
+                  <tr key={f._id} className="hover:bg-gray-50 dark:hover:bg-slate-700/60 transition-colors group">
                     <td className="px-6 py-3">
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-9 h-9 rounded-lg bg-paper flex items-center justify-center shrink-0">
+                        <div className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
                           <FileIcon mimeType={f.mimeType} />
                         </div>
-                        <span className="text-sm font-medium text-ink truncate max-w-[220px]">
+                        <span className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[220px]">
                           {f.originalName}
                         </span>
                       </div>
@@ -314,10 +314,10 @@ export default function Files() {
                     <td className="px-4 py-3">
                       <FileTypeBadge mimeType={f.mimeType} />
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-ink-muted">
+                    <td className="px-4 py-3 text-sm font-mono text-gray-600 dark:text-gray-400">
                       {formatBytes(f.fileSize)}
                     </td>
-                    <td className="px-4 py-3 text-sm text-ink-muted">
+                    <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
                       {formatDate(f.createdAt)}
                     </td>
                     <td className="px-4 py-3">
@@ -359,17 +359,17 @@ export default function Files() {
             </table>
 
             {/* Mobile cards */}
-            <ul className="sm:hidden divide-y divide-line">
+            <ul className="sm:hidden divide-y divide-gray-200 dark:divide-slate-700">
               {files.map((f) => (
                 <li key={f._id} className="p-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-paper flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
                     <FileIcon mimeType={f.mimeType} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-ink truncate">
+                    <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                       {f.originalName}
                     </p>
-                    <p className="text-xs text-ink-faint font-mono mt-0.5">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5">
                       {formatBytes(f.fileSize)} · {formatDate(f.createdAt)}
                     </p>
                   </div>
@@ -404,22 +404,22 @@ export default function Files() {
         )}
 
         {!activeSearch && totalPages > 1 && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-line">
-            <p className="text-xs text-ink-muted">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-slate-700">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
               Page {page} of {totalPages}
             </p>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                className="p-1.5 rounded-lg border border-line disabled:opacity-40 hover:bg-paper transition-colors"
+                className="p-1.5 rounded-lg border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
               >
                 <ChevronLeft size={15} />
               </button>
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page >= totalPages}
-                className="p-1.5 rounded-lg border border-line disabled:opacity-40 hover:bg-paper transition-colors"
+                className="p-1.5 rounded-lg border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 disabled:opacity-40 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
               >
                 <ChevronRight size={15} />
               </button>
@@ -439,13 +439,13 @@ export default function Files() {
             autoFocus
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}
-            className="w-full border border-line rounded-lg px-3.5 py-2.5 text-sm focus:border-cobalt transition-colors"
+            className="w-full border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 transition-colors"
           />
           <div className="flex justify-end gap-2">
             <button
               type="button"
               onClick={() => setRenameTarget(null)}
-              className="px-4 py-2 text-sm font-medium rounded-lg text-ink-muted hover:bg-paper transition-colors"
+              className="px-4 py-2 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
             >
               Cancel
             </button>
@@ -477,21 +477,21 @@ export default function Files() {
         onClose={() => setShareTarget(null)}
         title="Share file"
       >
-        <p className="text-sm text-ink-muted mb-3">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
           Anyone with this link can download{" "}
-          <span className="font-medium text-ink">
+          <span className="font-medium text-gray-900 dark:text-white">
             {shareTarget?.originalName}
           </span>
           .
         </p>
         {shareLoading ? (
-          <div className="h-11 bg-paper rounded-lg animate-pulse" />
+          <div className="h-11 bg-gray-100 dark:bg-slate-700 rounded-lg animate-pulse" />
         ) : (
           <div className="flex items-center gap-2">
             <input
               readOnly
               value={shareLink}
-              className="flex-1 border border-line rounded-lg px-3.5 py-2.5 text-sm font-mono bg-paper truncate"
+              className="flex-1 border border-gray-300 dark:border-slate-600 rounded-lg px-3.5 py-2.5 text-sm font-mono bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-white truncate"
             />
             <button
               onClick={() => {
@@ -519,8 +519,8 @@ function IconBtn({ children, label, onClick, danger }) {
       title={label}
       aria-label={label}
       className={`p-2 rounded-lg transition-colors ${danger
-        ? "text-ink-muted hover:text-coral hover:bg-coral-soft"
-        : "text-ink-muted hover:text-cobalt hover:bg-cobalt-soft"
+        ? "text-gray-500 dark:text-gray-400 hover:text-coral hover:bg-coral-soft dark:hover:bg-coral/20"
+        : "text-gray-500 dark:text-gray-400 hover:text-cobalt hover:bg-cobalt-soft dark:hover:bg-cobalt/20"
         }`}
     >
       {children}
