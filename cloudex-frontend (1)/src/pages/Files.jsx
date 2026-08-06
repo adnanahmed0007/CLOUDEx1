@@ -226,7 +226,7 @@ export default function Files() {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Search files…"
-              className="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg pl-9 pr-8 py-2 text-sm w-48 sm:w-60 focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
+              className="bg-white dark:bg-black border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-lg pl-9 pr-8 py-2 text-sm w-48 sm:w-60 focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
             />
             {(searchInput || activeSearch) && (
               <button
@@ -246,7 +246,7 @@ export default function Files() {
                 setSort(e.target.value);
                 setPage(1);
               }}
-              className="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white rounded-lg px-3 py-2 text-sm focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
+              className="bg-white dark:bg-black border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white rounded-lg px-3 py-2 text-sm focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 outline-none transition-colors"
             >
               {SORTS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -439,7 +439,7 @@ export default function Files() {
             autoFocus
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}
-            className="w-full border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 transition-colors"
+            className="w-full border border-gray-300 dark:border-slate-600 bg-white dark:bg-black text-gray-900 dark:text-white rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-cobalt focus:ring-2 focus:ring-cobalt/20 transition-colors"
           />
           <div className="flex justify-end gap-2">
             <button
@@ -491,7 +491,7 @@ export default function Files() {
             <input
               readOnly
               value={shareLink}
-              className="flex-1 border border-gray-300 dark:border-slate-600 rounded-lg px-3.5 py-2.5 text-sm font-mono bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-white truncate"
+              className="flex-1 border border-gray-300 dark:border-slate-600 rounded-lg px-3.5 py-2.5 text-sm font-mono bg-gray-50 dark:bg-black text-gray-900 dark:text-white truncate"
             />
             <button
               onClick={() => {
