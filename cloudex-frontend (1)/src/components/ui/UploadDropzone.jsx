@@ -1,10 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+ import { useCallback, useRef, useState } from "react";
 import { UploadCloud } from "lucide-react";
-
 export default function UploadDropzone({ onFileSelected, disabled }) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef(null);
-
   const handleDrop = useCallback(
     (e) => {
       e.preventDefault();
@@ -15,7 +13,6 @@ export default function UploadDropzone({ onFileSelected, disabled }) {
     },
     [onFileSelected, disabled]
   );
-
   return (
     <div
       onDragOver={(e) => {
@@ -27,8 +24,8 @@ export default function UploadDropzone({ onFileSelected, disabled }) {
       onClick={() => !disabled && inputRef.current?.click()}
       className={`relative flex flex-col items-center justify-center gap-2 text-center rounded-xl2 border-2 border-dashed px-6 py-10 cursor-pointer transition-colors ${
         dragging
-          ? "border-cobalt bg-cobalt-soft"
-          : "border-line bg-paper hover:border-cobalt/50 hover:bg-cobalt-soft/40"
+          ? "border-cobalt bg-cobalt-soft dark:bg-cobalt/20"
+          : "border-gray-300 dark:border-slate-600 bg-paper dark:bg-black hover:border-cobalt/50 hover:bg-cobalt-soft/40 dark:hover:bg-cobalt/10"
       } ${disabled ? "opacity-60 cursor-not-allowed" : ""}`}
     >
       <input
@@ -42,13 +39,13 @@ export default function UploadDropzone({ onFileSelected, disabled }) {
           e.target.value = "";
         }}
       />
-      <div className="w-11 h-11 rounded-full bg-cobalt-soft flex items-center justify-center">
+      <div className="w-11 h-11 rounded-full bg-cobalt-soft dark:bg-cobalt/20 flex items-center justify-center">
         <UploadCloud size={20} className="text-cobalt" />
       </div>
-      <p className="text-sm font-medium text-ink">
+      <p className="text-sm font-medium text-gray-900 dark:text-white">
         Drop a file here, or <span className="text-cobalt">browse</span>
       </p>
-      <p className="text-xs text-ink-faint">
+      <p className="text-xs text-gray-500 dark:text-gray-300">
         Sorted automatically into images, PDFs, videos, documents & others
       </p>
     </div>
