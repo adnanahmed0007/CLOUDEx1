@@ -4,9 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+ import { ThemeProvider } from "./context/ThemeContext";
 
+<React.StrictMode>
+  <ThemeProvider>
     <BrowserRouter
       future={{
         v7_startTransition: true,
@@ -15,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <App />
     </BrowserRouter>
-  </React.StrictMode>
-);
+  </ThemeProvider>
+</React.StrictMode>
