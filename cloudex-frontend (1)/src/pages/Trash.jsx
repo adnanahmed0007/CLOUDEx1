@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+ import { useCallback, useEffect, useState } from "react";
 import { RotateCcw, Trash2, Trash } from "lucide-react";
 import * as api from "../api/endpoints";
 import { useToast } from "../context/ToastContext";
@@ -62,17 +62,17 @@ export default function TrashPage() {
   return (
     <div className="space-y-6 animate-fadeUp">
       <div>
-        <h2 className="font-display font-semibold text-2xl text-ink">Trash</h2>
-        <p className="text-sm text-ink-muted mt-1">
+        <h2 className="font-display font-semibold text-2xl text-gray-900 dark:text-white">Trash</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
           Files stay here until you restore or permanently delete them.
         </p>
       </div>
 
-      <div className="bg-surface rounded-xl2 shadow-card overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl2 shadow-card overflow-hidden transition-colors">
         {loading ? (
           <div className="p-6 space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-14 bg-paper rounded-lg animate-pulse" />
+              <div key={i} className="h-14 bg-gray-100 dark:bg-slate-700 rounded-lg animate-pulse" />
             ))}
           </div>
         ) : files.length === 0 ? (
@@ -82,17 +82,17 @@ export default function TrashPage() {
             description="Files you delete will show up here first."
           />
         ) : (
-          <ul className="divide-y divide-line">
+          <ul className="divide-y divide-gray-200 dark:divide-slate-700">
             {files.map((f) => (
               <li key={f._id} className="flex items-center gap-3 px-6 py-3.5">
-                <div className="w-9 h-9 rounded-lg bg-paper flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
                   <FileIcon mimeType={f.mimeType} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-ink truncate">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {f.originalName}
                   </p>
-                  <p className="text-xs text-ink-faint font-mono mt-0.5">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5">
                     {formatBytes(f.fileSize)} · trashed {formatDate(f.updatedAt)}
                   </p>
                 </div>
@@ -104,14 +104,14 @@ export default function TrashPage() {
                     onClick={() => restore(f)}
                     disabled={restoringId === f._id}
                     title="Restore"
-                    className="p-2 rounded-lg text-ink-muted hover:text-mint hover:bg-mint-soft transition-colors disabled:opacity-50"
+                    className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-mint hover:bg-mint-soft dark:hover:bg-mint/20 transition-colors disabled:opacity-50"
                   >
                     <RotateCcw size={15} />
                   </button>
                   <button
                     onClick={() => setDeleteTarget(f)}
                     title="Delete forever"
-                    className="p-2 rounded-lg text-ink-muted hover:text-coral hover:bg-coral-soft transition-colors"
+                    className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-coral hover:bg-coral-soft dark:hover:bg-coral/20 transition-colors"
                   >
                     <Trash2 size={15} />
                   </button>
