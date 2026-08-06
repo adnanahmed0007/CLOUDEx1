@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, FileText } from "lucide-react";
 import * as api from "../api/endpoints";
@@ -118,7 +118,7 @@ export default function Folder() {
                     Back
                 </Link>
 
-                <h2 className="font-display text-2xl font-semibold text-ink">
+                <h2 className="font-display text-2xl font-semibold text-gray-900 dark:text-white">
                     Folder
                 </h2>
             </div>
@@ -138,14 +138,14 @@ export default function Folder() {
                 }}
             />
 
-            <div className="bg-surface rounded-xl2 shadow-card p-5">
+            <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl2 shadow-card p-5 transition-colors">
 
                 {loading ? (
                     <div className="space-y-3">
                         {[1, 2, 3].map((i) => (
                             <div
                                 key={i}
-                                className="h-14 rounded-lg bg-paper animate-pulse"
+                                className="h-14 rounded-lg bg-gray-100 dark:bg-slate-700 animate-pulse"
                             />
                         ))}
                     </div>
@@ -156,14 +156,14 @@ export default function Folder() {
                         description="Upload a file into this folder."
                     />
                 ) : (
-                    <ul className="divide-y divide-line">
+                    <ul className="divide-y divide-gray-200 dark:divide-slate-700">
                         {files.map((file) => (
                             <li
                                 key={file._id}
                                 className="flex items-center justify-between py-4"
                             >
                                 <div className="flex items-center gap-4 flex-1">
-                                    <div className="w-10 h-10 rounded-lg bg-paper flex items-center justify-center">
+                                    <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center">
                                         <FileIcon
                                             mimeType={file.mimeType}
                                             size={18}
@@ -171,11 +171,11 @@ export default function Folder() {
                                     </div>
 
                                     <div className="flex-1 min-w-0">
-                                        <p className="font-medium text-ink truncate">
+                                        <p className="font-medium text-gray-900 dark:text-white truncate">
                                             {file.originalName}
                                         </p>
 
-                                        <p className="text-xs text-ink-faint">
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">
                                             {formatBytes(file.fileSize)} • {formatDate(file.createdAt)}
                                         </p>
                                     </div>
@@ -189,7 +189,7 @@ export default function Folder() {
                                             const url = window.URL.createObjectURL(res.data);
                                             window.open(url, "_blank");
                                         }}
-                                        className="p-2 rounded hover:bg-paper"
+                                        className="p-2 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                                     >
                                         <Eye size={18} />
                                     </button>
@@ -199,7 +199,7 @@ export default function Folder() {
                                             const res = await api.downloadFile(file._id);
                                             api.triggerBrowserDownload(res.data, file.originalName);
                                         }}
-                                        className="p-2 rounded hover:bg-paper"
+                                        className="p-2 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                                     >
                                         <Download size={18} />
                                     </button>
@@ -209,21 +209,21 @@ export default function Folder() {
                                             setRenameTarget(file);
                                             setRenameValue(file.originalName);
                                         }}
-                                        className="p-2 rounded hover:bg-paper"
+                                        className="p-2 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                                     >
                                         <Pencil size={18} />
                                     </button>
 
                                     <button
                                         onClick={() => setTrashTarget(file)}
-                                        className="p-2 rounded hover:bg-paper text-red-500"
+                                        className="p-2 rounded hover:bg-gray-100 dark:hover:bg-slate-700 text-red-500 dark:text-red-400"
                                     >
                                         <Trash2 size={18} />
                                     </button>
 
                                     <button
                                         onClick={() => openShare(file)}
-                                        className="p-2 rounded hover:bg-paper"
+                                        className="p-2 rounded text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
                                     >
                                         <Share2 size={18} />
                                     </button>
@@ -244,21 +244,21 @@ export default function Folder() {
                     <input
                         value={renameValue}
                         onChange={(e) => setRenameValue(e.target.value)}
-                        className="w-full border rounded-lg px-3 py-2"
+                        className="w-full border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-gray-900 dark:text-white rounded-lg px-3 py-2 outline-none focus:border-cobalt focus:ring-2 focus:ring-cobalt/20"
                     />
 
                     <div className="flex justify-end gap-2">
                         <button
                             type="button"
                             onClick={() => setRenameTarget(null)}
-                            className="px-4 py-2 border rounded-lg"
+                            className="px-4 py-2 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
                         >
                             Cancel
                         </button>
 
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-cobalt text-white rounded-lg"
+                            className="px-4 py-2 bg-cobalt text-white rounded-lg hover:bg-cobalt-deep transition-colors"
                         >
                             Save
                         </button>
@@ -283,13 +283,13 @@ export default function Folder() {
                 onClose={() => setShareTarget(null)}
             >
                 {shareLoading ? (
-                    <p>Generating link...</p>
+                    <p className="text-gray-600 dark:text-gray-400">Generating link...</p>
                 ) : (
                     <div className="space-y-4">
                         <input
                             value={shareLink}
                             readOnly
-                            className="w-full border rounded-lg px-3 py-2"
+                            className="w-full border border-gray-300 dark:border-slate-600 bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-white rounded-lg px-3 py-2"
                         />
 
                         <button
@@ -297,7 +297,7 @@ export default function Folder() {
                                 navigator.clipboard.writeText(shareLink);
                                 setCopied(true);
                             }}
-                            className="w-full bg-cobalt text-white rounded-lg py-2 flex items-center justify-center gap-2"
+                            className="w-full bg-cobalt text-white rounded-lg py-2 flex items-center justify-center gap-2 hover:bg-cobalt-deep transition-colors"
                         >
                             {copied ? <Check size={18} /> : <Copy size={18} />}
                             {copied ? "Copied!" : "Copy Link"}
