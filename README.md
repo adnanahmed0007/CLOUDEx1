@@ -1,92 +1,235 @@
-Cloud Storage Backend (Google Drive / Dropbox Inspired)
+ # CLOudex — Cloud Storage & File Management Platform
 
-Tech Stack: Node.js, Express.js, MongoDB, Mongoose, Redis, JWT, Multer, Bcrypt
+CLOudex is a secure cloud storage backend inspired by platforms like Google Drive and Dropbox. It allows authenticated users to upload, download, search, organize, and manage their files while providing storage tracking, Redis caching, rate limiting, and secure API access.
 
-Description:
-Designed and developed a secure cloud storage backend enabling authenticated users to upload, manage, search, and organize files with Redis-powered caching, storage management, and production-ready API optimizations.
+## 🚀 Features
 
-Key Features
-Developed secure JWT-based authentication with protected REST APIs.
-Implemented user registration, login, and password update using bcrypt password hashing.
-Added Redis-based rate limiting for Login, Signup, Upload, and Password Update APIs to prevent abuse.
-Built complete file management APIs including:
-Upload Files
-Download Files
-Rename Files
-Search Files
-Trash & Restore Files
-Permanent Delete
-Implemented 1 GB per-user storage quota with automatic storage usage tracking.
-Developed a dashboard API displaying:
-Total Files
-Trashed Files
-Recent Files
-Storage Usage Statistics
-Remaining Storage
-Added server-side Pagination and Sorting for efficient file retrieval.
-Optimized backend performance using Redis caching for:
-File Listing
-Dashboard Data
-File Search
-Pagination Results
-Implemented automatic Redis cache invalidation after file upload, rename, delete, trash, and restore operations to maintain data consistency.
-Enforced user-level authorization so users can only access and manage their own files.
-Designed scalable RESTful APIs with centralized error handling and validation.
-Technical Highlights
-JWT Authentication & Authorization
-Express.js REST API Development
-MongoDB & Mongoose ODM
-Redis Integration & Caching
-Redis Rate Limiting
-Multer File Upload
-Bcrypt Password Encryption
-Pagination & Sorting
-Search APIs
-Storage Quota Management
-Secure File Access
-Cache Invalidation Strategy
-REST API Design
-Resume Skills
+### 🔐 Authentication & Security
 
-Languages
+* User registration and login
+* JWT-based authentication
+* Protected REST APIs
+* User-level authorization
+* Bcrypt password hashing
+* Password update functionality
+* Redis-based rate limiting for:
 
-Java
-JavaScript
+  * Login
+  * Signup
+  * File upload
+  * Password update
 
-Backend
+### 📁 File Management
 
-Node.js
-Express.js
+* Upload files
+* Download files
+* Rename files
+* Search files
+* Move files to trash
+* Restore files
+* Permanently delete files
+* Secure file access based on authenticated user
 
-Database
+### 💾 Storage Management
 
-MongoDB
-Mongoose
-Redis
+* 1 GB storage quota per user
+* Automatic storage usage tracking
+* Remaining storage calculation
+* File count tracking
+* Trashed file tracking
+* Recent files tracking
 
-Authentication & Security
+### 📊 Dashboard
 
-JWT
-Bcrypt
-Rate Limiting
+The dashboard API provides:
 
-Concepts
+* Total files
+* Trashed files
+* Recent files
+* Storage usage
+* Remaining storage
+* Storage statistics
 
-REST APIs
+### ⚡ Redis Caching
+
+Redis is used to improve API performance by caching:
+
+* File listings
+* Dashboard data
+* File search results
+* Pagination results
+
+Cache invalidation is automatically performed when file data changes, including:
+
+* Upload
+* Rename
+* Delete
+* Trash
+* Restore
+
+### 📄 Pagination & Sorting
+
+* Server-side pagination
+* Server-side sorting
+* Efficient file retrieval
+* Cached pagination results
+
+### 🛡️ API Design
+
+* RESTful API architecture
+* Centralized error handling
+* Request validation
+* Protected routes
+* User-specific resource access
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* MongoDB
+* Mongoose
+
+### Authentication & Security
+
+* JWT
+* Bcrypt
+* Redis Rate Limiting
+
+### File Handling
+
+* Multer
+
+### Caching
+
+* Redis
+
+---
+
+## 📂 Core Modules
+
+```text
 Authentication
-Authorization
-Redis Caching
-Pagination
-Sorting
-Search Optimization
-File Storage Management
-Storage Quota Management
-Cache Invalidation
-Resume Project (Short Version - 4 Bullet Points)
+├── Register
+├── Login
+└── Password Update
 
-Cloud Storage Backend | Node.js, Express.js, MongoDB, Redis
+File Management
+├── Upload
+├── Download
+├── Rename
+├── Search
+├── Trash
+├── Restore
+└── Permanent Delete
 
-Developed a secure cloud storage backend with JWT authentication, role-based authorization, and 1 GB per-user storage management.
-Built REST APIs for file upload, download, search, rename, trash, restore, permanent deletion, pagination, and sorting.
-Improved API performance using Redis caching for file listings, dashboard analytics, search, and pagination with automatic cache invalidation.
-Implemented Redis-based rate limiting, bcrypt password encryption, and dashboard analytics for storage usage, recent files, and user activity.
+Dashboard
+├── File Statistics
+├── Storage Usage
+├── Recent Files
+└── Remaining Storage
+
+Performance
+├── Redis Caching
+├── Cache Invalidation
+├── Pagination
+└── Sorting
+
+Security
+├── JWT Authentication
+├── Authorization
+├── Bcrypt Password Hashing
+└── Redis Rate Limiting
+```
+
+---
+
+## 🔄 File Management Flow
+
+```text
+User Login
+    ↓
+JWT Authentication
+    ↓
+Access Protected API
+    ↓
+Upload / Manage Files
+    ↓
+MongoDB
+    ↓
+Redis Cache
+    ↓
+Dashboard / Search / File Listing
+```
+
+When a file is modified:
+
+```text
+File Mutation
+    ↓
+Update MongoDB
+    ↓
+Invalidate Related Redis Cache
+    ↓
+Return Updated Data
+```
+
+---
+
+## ⚡ Performance Optimization
+
+CLOudex uses Redis to reduce repeated database queries for frequently requested data.
+
+Cached operations include:
+
+* File listing
+* Dashboard statistics
+* File search
+* Pagination results
+
+When a file is uploaded, renamed, deleted, trashed, or restored, the related cache entries are invalidated to keep cached data synchronized with the database.
+
+---
+
+## 🔒 Security
+
+The backend implements multiple security mechanisms:
+
+* JWT authentication
+* User-level authorization
+* Bcrypt password hashing
+* Protected REST APIs
+* Redis-based API rate limiting
+* Request validation
+* Centralized error handling
+
+Users can only access and manage resources belonging to their own account.
+
+---
+
+## 📌 Project Highlights
+
+* Secure cloud file management backend
+* 1 GB per-user storage management
+* Redis caching and cache invalidation
+* Redis-based API rate limiting
+* JWT authentication and authorization
+* File search, sorting, and pagination
+* Dashboard and storage analytics
+* RESTful API architecture
+* User-level secure file access
+
+---
+
+## 👨‍💻 Author
+
+**Adnan Ahmed**
+
+Built as a full-stack/backend engineering project to explore secure file storage, REST API development, Redis caching, authentication, authorization, and backend performance optimization.
+
